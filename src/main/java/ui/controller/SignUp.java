@@ -1,10 +1,12 @@
 package ui.controller;
 
 import domain.model.Person;
+import domain.model.Role;
 import sun.applet.AppletResourceLoader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.metal.MetalRootPaneUI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class SignUp extends RequestHandler {
         setPassword(request, person, errors);
         setFirstName(request, person, errors);
         setLastName(request, person, errors);
+        setRole(person, errors);
 
         if (errors.size() == 0) {
             try {
@@ -78,6 +81,14 @@ public class SignUp extends RequestHandler {
             String lastName = request.getParameter("lastName");
             person.setLastName(lastName);
             request.setAttribute("lastNamePreviousValue", lastName);
+        } catch (Exception e) {
+            errors.add(e.getMessage());
+        }
+    }
+
+    private void setRole(Person person, ArrayList<String> errors) {
+        try {
+            person.setRole(Role.USER);
         } catch (Exception e) {
             errors.add(e.getMessage());
         }

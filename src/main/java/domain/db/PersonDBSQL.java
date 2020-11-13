@@ -1,5 +1,6 @@
 package domain.db;
 
+import domain.model.Role;
 import util.DbConnectionService;
 import domain.model.Person;
 
@@ -28,7 +29,7 @@ public class PersonDBSQL implements PersonDB {
         if (personExists(person)) {
             throw new DbException("User already exists");
         }
-        String sql = String.format("INSERT INTO %s.person (userid, email, password, fname, lname) VALUES (?, ?, ?, ?, ?)", this.schema);
+        String sql = String.format("INSERT INTO %s.person (userid, email, password, fname, lname, role) VALUES (?, ?, ?, ?, ?, ?)", this.schema);
 
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);
@@ -37,6 +38,7 @@ public class PersonDBSQL implements PersonDB {
             statementSQL.setString(3, person.getPassword());
             statementSQL.setString(4, person.getFirstName());
             statementSQL.setString(5, person.getLastName());
+            statementSQL.setString(6, person.getRole().getValue());
             statementSQL.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -66,8 +68,10 @@ public class PersonDBSQL implements PersonDB {
                 String password = result.getString("password");
                 String fname = result.getString("fname");
                 String lname = result.getString("lname");
+                String role = result.getString("role");
 
-                Person person = new Person(userid, email, password, fname, lname);
+
+                Person person = new Person(userid, email, password, fname, lname, Role.valueOf(role.toUpperCase()));
                 persons.add(person);
             }
         } catch (SQLException e) {
@@ -93,8 +97,9 @@ public class PersonDBSQL implements PersonDB {
                 String password = result.getString("password");
                 String fname = result.getString("fname");
                 String lname = result.getString("lname");
+                String role = result.getString("role");
 
-                person = new Person(userid, email, password, fname, lname);
+                person = new Person(userid, email, password, fname, lname, Role.valueOf(role.toUpperCase()));
             }
 
         } catch (SQLException e) {

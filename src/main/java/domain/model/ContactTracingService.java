@@ -14,8 +14,14 @@ public class ContactTracingService {
 
 	
 	public ContactTracingService() {
-		Person administrator = new Person("admin", "admin@ucll.be", "t", "Ad", "Ministrator");
-		//add(administrator);
+		/*Person administrator = new Person();
+		administrator.setUserid("admin");
+		administrator.setEmail("admin@ucll.be");
+		administrator.setPasswordHashed("t");
+		administrator.setFirstName("Ad");
+		administrator.setLastName("Ministrator");
+		administrator.setRole(Role.ADMINISTRATOR);
+		addPerson(administrator);*/
 	}
 
 	//Methods for personDB
