@@ -19,6 +19,9 @@ public class ContactOverview extends RequestHandler {
         } else {
             request.setAttribute("showUniqueContacts", "yes");
             contacts = service.getUniqueContact();
+            for (Contact c : contacts) {
+                System.out.println(c.getEmail());
+            }
         }
 
         request.setAttribute("contacts", contacts);

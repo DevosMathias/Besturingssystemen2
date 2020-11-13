@@ -85,7 +85,7 @@ public class ContactDBSQL implements ContactDB {
     public List<Contact> getUnique() {
         List<Contact> contacts = new ArrayList<>();
 
-        String sql = String.format("SELECT * FROM %s.contact AS C WHERE C.date >= ALL (SELECT date FROM %s.contact WHERE email = C.email) AND C.hour >= ALL (SELECT hour FROM %s.contact WHERE email = C.email) ORDER BY date DESC, hour DESC", this.schema, this.schema, this.schema);
+        String sql = String.format("SELECT * FROM %s.contact AS C WHERE C.date >= ALL (SELECT date FROM %s.contact WHERE email = C.email) AND C.hour >= ALL (SELECT hour FROM %s.contact AS X WHERE X.email = C.email AND X.date >= ALL (SELECT date FROM %s.contact WHERE email = X.email)) ORDER BY date DESC, hour DESC", this.schema, this.schema, this.schema, this.schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);

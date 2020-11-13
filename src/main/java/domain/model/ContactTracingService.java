@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ContactTracingService {
-	private Map<String, Person> persons = new HashMap<>();
-
 	private PersonDB personDB = new PersonDBSQL();
 	private ContactDB contactDB = new ContactDBSQL();
 
@@ -22,27 +20,14 @@ public class ContactTracingService {
 
 	//Methods for personDB
 	public Person getPerson(String personId){
-		/*if(personId == null){
-			throw new DbException("No id given");
-		}*/
 		return personDB.get(personId);
-		//return persons.get(personId);
 	}
 	
 	public List<Person> getAllPersons(){
-		/*return new ArrayList<Person>(persons.values());*/
-		//System.out.println("test8881");
 		return personDB.getAll();
 	}
 
 	public void addPerson(Person person){
-		/*if(person == null){
-			throw new DbException("No person given");
-		}
-		if (persons.containsKey(person.getUserid())) {
-			throw new DbException("User already exists");
-		}
-		persons.put(person.getUserid(), person);*/
 		personDB.add(person);
 	}
 	

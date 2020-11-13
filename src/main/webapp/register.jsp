@@ -11,24 +11,16 @@
 </head>
 <body>
     <div id="container">
-    <header>
-        <h1><!--<span>Tracing App</span>--></h1>
-        <nav>
-            <ul>
-                <li><a href="Controller">Home</a></li>
-                <li><a href="Controller?action=Overview">Overview</a></li>
-                <li><a href="Controller?action=ContactOverview">Contacts</a></li>
-                <li id="actual"><a href="Controller?action=Register">Register</a></li>
-            </ul>
-        </nav>
-        <h2>Register</h2>
-    </header>
+    <jsp:include page="header.jsp">
+        <jsp:param name="actual" value="Register"></jsp:param>
+    </jsp:include>
+
     <main>
     <C:if test="${not empty errors}">
         <div class="alert-danger">
             <ul>
                 <C:forEach var="error" items="${errors}">
-                    <li>${error}</li>
+                    <li><C:out value="${error}"/></li>
                 </C:forEach>
             </ul>
         </div>
@@ -37,14 +29,14 @@
 
     <form method="POST" action="Controller?action=SignUp" novalidate="novalidate">
     	<!-- novalidate in order to be able to run tests correctly -->
-        <p><label for="userid">User id</label><input type="text" id="userid" name="userid" value="${userIdPreviousValue}"
+        <p><label for="userid">User id</label><input type="text" id="userid" name="userid" value="<C:out value="${userIdPreviousValue}"/>"
          required > </p>
-        <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" value="${firstNamePreviousValue}"
+        <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" value="<C:out value="${firstNamePreviousValue}"/>"
          required> </p>
-        <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" value="${lastNamePreviousValue}"
+        <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" value="<C:out value="${lastNamePreviousValue}"/>"
          required> </p>
-        <p><label for="email">Email</label><input type="email" id="email" name="email" value="${emailPreviousValue}" required></p>
-        <p><label for="password">Password</label><input type="password" id="password"  name="password" value="${passwordPreviousValue}"
+        <p><label for="email">Email</label><input type="email" id="email" name="email" value="<C:out value="${emailPreviousValue}"/>" required></p>
+        <p><label for="password">Password</label><input type="password" id="password"  name="password" value="<C:out value="${passwordPreviousValue}"/>"
          required> </p>
         <p><input type="submit" id="signUp" value="Sign Up"></p>
         

@@ -9,18 +9,9 @@
 </head>
 <body>
     <div id="container">
-        <header>
-            <h1><!--<span>Tracing App</span>--></h1>
-            <nav>
-                <ul>
-                    <li><a href="Controller">Home</a></li>
-                    <li id="actual"><a href="Controller?action=Overview">Overview</a></li>
-                    <li><a href="Controller?action=ContactOverview">Contacts</a></li>
-                    <li><a href="Controller?action=Register">Register</a></li>
-                </ul>
-            </nav>
-            <h2>User Overview</h2>
-        </header>
+        <jsp:include page="header.jsp">
+            <jsp:param name="actual" value="User Overview"></jsp:param>
+        </jsp:include>
         <main>
             <table>
                 <tr>
@@ -31,12 +22,12 @@
 
                 <C:forEach var="person" items="${persons}">
                     <tr>
-                        <td>${person.email}</td>
-                        <td>${person.firstName}</td>
-                        <td>${person.lastName}</td>
+                        <td><C:out value="${person.email}"/></td>
+                        <td><C:out value="${person.firstName}"/></td>
+                        <td><C:out value="${person.lastName}"/></td>
                     <C:if test="${personLogIn ne null}">
                         <C:if test="${personLogIn.userid eq person.userid}">
-                            <td><a href="Controller?action=ChangeMailForm&userid=${person.userid}">Change Mail</a></td>
+                            <td><a href="Controller?action=ChangeMailForm&userid=<C:out value="${person.userid}"/>">Change Mail</a></td>
                         </C:if>
                     </C:if>
                     </tr>

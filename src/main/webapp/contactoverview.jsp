@@ -1,5 +1,6 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Eigenaar
@@ -18,25 +19,16 @@
 </head>
 <body>
 <div id="container">
-    <header>
-        <h1><!--<span>Tracing App</span>--></h1>
-        <nav>
-            <ul>
-                <li><a href="Controller">Home</a></li>
-                <li><a href="Controller?action=Overview">Overview</a></li>
-                <li id="actual"><a href="Controller?action=ContactOverview">Contacts</a></li>
-                <li><a href="Controller?action=Register">Register</a></li>
-            </ul>
-        </nav>
-        <h2>Contact Overview</h2>
-    </header>
+    <jsp:include page="header.jsp">
+        <jsp:param name="actual" value="Contact Overview"></jsp:param>
+    </jsp:include>
     <main>
 
         <C:if test="${not empty errors}">
             <div class="alert-danger">
                 <ul>
                     <C:forEach var="error" items="${errors}">
-                        <li>${error}</li>
+                        <li><C:out value="${error}"/></li>
                     </C:forEach>
                 </ul>
             </div>
@@ -59,10 +51,11 @@
 
             <C:forEach var="contact" items="${contacts}">
                 <fmt:parseDate value="${contact.date}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>
+                <fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" var="formatedDate"/>
                 <tr>
-                    <td><fmt:formatDate pattern="dd/MM/yyyy" value='${parsedDate}'/></td>
-                    <td>${contact.hour}</td>
-                    <td>${contact.firstName} ${contact.lastName}</td>
+                    <td><C:out value="${formatedDate}"/> </td>
+                    <td><C:out value="${contact.hour}"/></td>
+                    <td><C:out value="${contact.firstName}"/> <C:out value="${contact.lastName}"/></td>
                 </tr>
             </C:forEach>
 
@@ -73,27 +66,27 @@
             <!-- novalidate in order to be able to run tests correctly -->
             <p>
                 <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" value="${firstNamePreviousValue}" required>
+                <input type="text" id="firstName" name="firstName" value="<C:out value="${firstNamePreviousValue}"/>" required>
             </p>
             <p>
                 <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" value="${lastNamePreviousValue}" required>
+                <input type="text" id="lastName" name="lastName" value="<C:out value="${lastNamePreviousValue}"/>" required>
             </p>
             <p>
                 <label for="date">Date</label>
-                <input type="date" id="date" name="date" value="${datePreviousValue}" required>
+                <input type="date" id="date" name="date" value="<C:out value="${datePreviousValue}"/>" required>
             </p>
             <p>
                 <label for="hour">Hour</label>
-                <input type="time" id="hour" name="hour" value="${hourPreviousValue}" required>
+                <input type="time" id="hour" name="hour" value="<C:out value="${hourPreviousValue}"/>" required>
             </p>
             <p>
                 <label for="gsm">GSM</label>
-                <input type="tel" id="gsm" name="gsm" value="${gsmPreviousValue}" required>
+                <input type="tel" id="gsm" name="gsm" value="<C:out value="${gsmPreviousValue}"/>" required>
             </p>
             <p>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="${emailPreviousValue}" required>
+                <input type="email" id="email" name="email" value="<C:out value="${emailPreviousValue}"/>" required>
             </p>
             <p>
                 <input type="submit" id="addContact" value="Add Contact">

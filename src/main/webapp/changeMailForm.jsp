@@ -35,7 +35,7 @@
         <form method="POST" action="/Controller?action=ChangeMail">
             <p><label for="newMail">New mail</label>
                 <input type="text" id="newMail" name="newMail" required></p>
-            <p><input type="hidden" id="userid" name="userid" value="${userid}"></p>
+            <p><input type="hidden" id="userid" name="userid" value="<C:out value="${userid}"/>"></p>
             <p><input type="submit" id="changeMail" value="Change mail"></p>
         </form>
     </main>

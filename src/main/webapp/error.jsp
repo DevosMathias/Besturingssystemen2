@@ -1,3 +1,4 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Eigenaar
@@ -16,7 +17,7 @@
 </head>
 <body>
     <main id="container">
-        <p>You caused a ${pageContext.exception} on the server.</p>
+        <p>You caused a <C:out value="${pageContext.exception}"/> on the server.</p>
         <p>Go <a href="index.jsp">Home</a>.</p>
     </main>
 </body>

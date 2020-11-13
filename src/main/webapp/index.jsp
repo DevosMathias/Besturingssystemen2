@@ -11,19 +11,9 @@
 </head>
 <body>
 	<div id="container">
-		<header>
-			<h1><!--<span>Tracing App</span>--></h1>
-			<nav>
-				<ul>
-					<li id="actual"><a href="Controller">Home</a></li>
-					<li><a href="Controller?action=Overview">Overview</a></li>
-					<li><a href="Controller?action=ContactOverview">Contacts</a></li>
-					<li><a href="Controller?action=Register">Register</a></li>
-				</ul>
-			</nav>
-			<h2>Home</h2>
-
-		</header>
+		<jsp:include page="header.jsp">
+			<jsp:param name="actual" value="Home"></jsp:param>
+		</jsp:include>
 		<main>
 			<C:if test="${error ne null}">
 				<div class="alert-danger">
