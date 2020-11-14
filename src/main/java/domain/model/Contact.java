@@ -33,7 +33,7 @@ public class Contact {
     }
 
     public void setFirstname(String firstName) {
-        if (firstName.isEmpty()) {
+        if (firstName == null || firstName.isEmpty()) {
             throw new DomainException("No first name given");
         }
         this.firstName = firstName;
@@ -44,7 +44,7 @@ public class Contact {
     }
 
     public void setLastname(String lastName) {
-        if (lastName.isEmpty()) {
+        if (lastName == null || lastName.isEmpty()) {
             throw new DomainException("No last name given");
         }
         this.lastName = lastName;
@@ -55,6 +55,9 @@ public class Contact {
     }
 
     public void setDate(LocalDate date) {
+        if (date == null) {
+            throw new DomainException("");
+        }
         if (date.isAfter(LocalDate.now())) {
             throw new DomainException("Date cannot be in the future");
         }
@@ -79,7 +82,7 @@ public class Contact {
     }
 
     public void setGsm(String gsm) {
-        if (gsm.isEmpty()) {
+        if (gsm == null || gsm.isEmpty()) {
             throw new IllegalArgumentException("No gsm given");
         }
         String USERID_PATTERN = "^(\\+32|\\+31)+[0-9]{10}";
@@ -96,7 +99,7 @@ public class Contact {
     }
 
     public void setEmail(String email) {
-        if(email.isEmpty()){
+        if(email == null || email.isEmpty()){
             throw new DomainException("No email given");
         }
         String USERID_PATTERN =

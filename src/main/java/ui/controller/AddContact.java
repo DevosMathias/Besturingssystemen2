@@ -64,7 +64,7 @@ public class AddContact extends RequestHandler {
     public void setDate(HttpServletRequest request, Contact contact, ArrayList<String> errors) {
         try {
             String date = request.getParameter("date");
-            if (date.isEmpty()) {
+            if (date == null || date.isEmpty()) {
                 throw new IllegalArgumentException("No valid date given");
             }
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -81,7 +81,7 @@ public class AddContact extends RequestHandler {
     public void setHour(HttpServletRequest request, Contact contact, ArrayList<String> errors) {
         try {
             String hour = request.getParameter("hour");
-            if (hour.isEmpty()) {
+            if (hour == null || hour.isEmpty()) {
                 throw new IllegalArgumentException("No valid time given");
             }
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");

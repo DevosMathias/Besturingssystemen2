@@ -37,11 +37,14 @@ public class SignUp extends RequestHandler {
 
     private void setUserId(HttpServletRequest request, Person person, ArrayList<String> errors) {
         try {
-            String userId = request.getParameter("userid").toLowerCase();
+            //String userId = request.getParameter("userid").toLowerCase();
+            String userId = request.getParameter("userid");
             person.setUserid(userId);
             request.setAttribute("userIdPreviousValue", userId);
         } catch (Exception e) {
             errors.add(e.getMessage());
+            System.out.println("testSignUpError");
+            System.out.println(e.getMessage());
         }
     }
 

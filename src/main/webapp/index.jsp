@@ -23,6 +23,10 @@
 				</div>
 			</C:if>
 
+			<C:if test="${notAuthorized ne null}">
+				<p class="alert-danger"><C:out value="${notAuthorized}"/></p>
+			</C:if>
+
 			<p>Welkom bij de contact trace applicatie van Scouting Lommel!</p>
 
 			<C:choose>

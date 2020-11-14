@@ -1,5 +1,6 @@
 package ui.controller;
 
+import com.sun.java.swing.plaf.windows.WindowsDesktopIconUI;
 import domain.model.ContactTracingService;
 import domain.model.DomainException;
 
@@ -24,7 +25,7 @@ public class controller extends HttpServlet {
         processRequest(request, response);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NotAuthorizedException {
         String command = request.getParameter("action");
         String destination = "index.jsp";
 
@@ -32,7 +33,12 @@ public class controller extends HttpServlet {
             try {
                 RequestHandler handler = handlerFactory.getHandler(command, service);
                 destination = handler.handleRequest(request, response);
-            } catch (Exception e) {
+            } catch (NotAuthorizedException e) {
+                request.setAttribute("notAuthorized", "You have insufficient rights to have a look at the requested page.");
+                destination = "index.jsp";
+                //handlerFactory.getHandler("Home", service).handleRequest(request, response);
+            }
+            catch (Exception e) {
                 throw new IllegalArgumentException(e);
                 /*request.setAttribute("error", e.getMessage());
                 destination = "error.jsp";*/
