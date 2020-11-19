@@ -27,7 +27,7 @@
         </C:if>
 
 
-        <form method="POST" action="Controller?action=" novalidate="novalidate">
+        <form method="POST" action="Controller?action=RegisterTestResult" novalidate="novalidate">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="date">Date</label>
                 <input type="date" id="date" name="date" value="" required /> </p>

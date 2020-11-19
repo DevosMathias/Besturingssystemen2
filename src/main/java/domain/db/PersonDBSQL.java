@@ -81,14 +81,14 @@ public class PersonDBSQL implements PersonDB {
     }
 
     public Person get(String id) {
-        if (id == null) {
+        if (id == null || id.trim().isEmpty()) {
             throw new DbException("No id given");
         }
         Person person = null;
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", this.schema);
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);
-            statementSQL.setString(1, id);
+            statementSQL.setString(1, id.toLowerCase());
             ResultSet result = statementSQL.executeQuery();
 
             while (result.next()) {

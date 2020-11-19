@@ -8,12 +8,16 @@
             <C:if test="${personLogIn.role == 'ADMINISTRATOR'}">
                 <li ${param.actual eq 'User Overview'?"id=actual":""}>
                     <a href="Controller?action=Overview">Overview</a></li>
+                <li ${param.actual eq 'All Contacts Overview'?"id=actual":""}>
+                    <a href="Controller?action=AllContactsOverview">All contacts</a></li>
+                <li ${param.actual eq 'Test Results Overview'?"id=actual":""}>
+                    <a href="Controller?action=TestResultsOverview">Show all tests</a></li>
             </C:if>
             <C:if test="${personLogIn.role == 'ADMINISTRATOR' || personLogIn.role == 'USER'}">
                 <li ${param.actual eq 'Contact Overview'?"id=actual":""}>
                     <a href="Controller?action=ContactOverview">Contacts</a></li>
                 <li ${param.actual eq 'Register Test Result'?"id=actual":""}>
-                    <a href="Controller?action=TestResultForm">Register Test Result</a></li>
+                    <a href="Controller?action=TestResultForm">Register test result</a></li>
                 <li ${param.actual eq 'Contact the following people'?"id=actual":""}>
                     <a href="Controller?action=Search">Search</a></li>
             </C:if>

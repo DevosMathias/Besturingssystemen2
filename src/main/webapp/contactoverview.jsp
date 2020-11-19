@@ -88,6 +88,7 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value="<C:out value="${emailPreviousValue}"/>" required>
             </p>
+            <input type="hidden" name="userid" value="<C:out value="${personLogIn.userid}"/>">
             <p>
                 <input type="submit" id="addContact" value="Add Contact">
             </p>

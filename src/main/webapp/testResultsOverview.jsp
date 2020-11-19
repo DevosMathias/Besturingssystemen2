@@ -14,42 +14,32 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8">
-    <title>Search</title>
+    <title>Test Results Overview</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <div id="container">
     <jsp:include page="header.jsp">
-        <jsp:param name="actual" value="Contact the following people"></jsp:param>
+        <jsp:param name="actual" value="Test Results Overview"></jsp:param>
     </jsp:include>
     <main>
 
-        <C:if test="${not empty errors}">
-            <div class="alert-danger">
-                <ul>
-                    <C:forEach var="error" items="${errors}">
-                        <li><C:out value="${error}"/></li>
-                    </C:forEach>
-                </ul>
-            </div>
-        </C:if>
-
         <C:choose>
-            <C:when test="${not empty contacts}">
+            <C:when test="${not empty tests}">
                 <table>
                     <tr>
-                        <th>Name</th>
-                        <th>GSM</th>
-                        <th>Email</th>
+                        <th>Userid</th>
+                        <th>Date</th>
                     </tr>
-                <C:forEach var="contact" items="${contacts}">
-                    <tr>
-                        <td><C:out value="${contact.firstName} ${contact.lastName}"/></td>
-                        <td><C:out value="${contact.gsm}"/></td>
-                        <td><C:out value="${contact.email}"/></td>
-                    </tr>
-                </C:forEach>
-                    <caption>Contacts Overview</caption>
+                    <C:forEach var="test" items="${tests}">
+                        <fmt:parseDate value="${test.date}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>
+                        <fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" var="formatedDate"/>
+                        <tr>
+                            <td><C:out value="${test.userid}"/></td>
+                            <td><C:out value="${formatedDate}"/></td>
+                        </tr>
+                    </C:forEach>
+                    <caption>Test Results Overview</caption>
                 </table>
             </C:when>
             <C:otherwise>

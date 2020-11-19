@@ -10,13 +10,14 @@ public class LogIn extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 
-        String userid = request.getParameter("userid").toLowerCase();
-        String password = request.getParameter("password");
-
         try {
+            String userid = request.getParameter("userid");
+            String password = request.getParameter("password");
+
             Person person = service.getPerson(userid); //nog try catch doen???
             if (person != null && person.isCorrectPassword(password)) {
                 request.getSession().setAttribute("personLogIn", person);
+                response.sendRedirect("index.jsp");
             }
         } catch (Exception e) {
             System.out.println("test");

@@ -4,6 +4,7 @@ import domain.db.*;
 import domain.model.Contact;
 import domain.model.Person;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
 public class ContactTracingService {
 	private PersonDB personDB = new PersonDBSQL();
 	private ContactDB contactDB = new ContactDBSQL();
+	private TestDB testDB = new TestDBSQL();
 
 	
 	public ContactTracingService() {
@@ -67,9 +69,36 @@ public class ContactTracingService {
 		contactDB.add(contact);
 	}
 
-	public List<Contact> getAllContacts() {
-		return contactDB.getAll();
+	public List<Contact> getAllContactsPerson(String userid) {
+		return contactDB.getAllContactsPerson(userid);
 	}
 
-	public List<Contact> getUniqueContact() {return contactDB.getUnique();}
+	public List<Contact> getUniqueContact(String userid) {
+		return contactDB.getUnique(userid);
+	}
+
+	public List<Contact> getAllContactsAdmin() {
+		return contactDB.getAllContactsAdmin();
+	}
+
+	public List<Contact> getAllContactsPersonAfterDate(String userid, LocalDate date) {
+		return contactDB.getAllContactsPersonAfterDate(userid, date);
+	}
+
+	//methods for test
+	public List<Test> getAllTestsPerson(String userid) {
+		return testDB.getAllTestsPerson(userid);
+	}
+
+	public Test getTestLastPerson(String userid) {
+		return testDB.getLastTestPerson(userid);
+	}
+
+	public List<Test> getAllTests() {
+		return testDB.getAllTests();
+	}
+
+	public void addTest(Test test) {
+		testDB.addTest(test);
+	}
 }

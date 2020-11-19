@@ -14,14 +14,16 @@ public class Contact {
     private LocalTime hour;
     private String gsm;
     private String email;
+    private String userid;
 
-    public Contact(String firstName, String lastName, LocalDate date, LocalTime hour, String gsm, String email) {
-        setFirstname(firstName);
-        setLastname(lastName);
+    public Contact(String firstName, String lastName, LocalDate date, LocalTime hour, String gsm, String email, String userid) {
+        setFirstName(firstName);
+        setLastName(lastName);
         setDate(date);
         setHour(hour);
         setGsm(gsm);
         setEmail(email);
+        setUserid(userid);
     }
 
     public Contact() {
@@ -32,7 +34,7 @@ public class Contact {
         return firstName;
     }
 
-    public void setFirstname(String firstName) {
+    public void setFirstName(String firstName) {
         if (firstName == null || firstName.isEmpty()) {
             throw new DomainException("No first name given");
         }
@@ -43,7 +45,7 @@ public class Contact {
         return lastName;
     }
 
-    public void setLastname(String lastName) {
+    public void setLastName(String lastName) {
         if (lastName == null || lastName.isEmpty()) {
             throw new DomainException("No last name given");
         }
@@ -111,5 +113,16 @@ public class Contact {
             throw new DomainException("Email not valid");
         }
         this.email = email;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        if (userid == null || userid.isEmpty()) {
+            throw new DomainException("No valid userid");
+        }
+        this.userid = userid;
     }
 }

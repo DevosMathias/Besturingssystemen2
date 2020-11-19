@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.model.Contact;
+import domain.model.Role;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,9 @@ import java.util.Locale;
 public class AddContact extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+        Role[] roles = {Role.USER, Role.ADMINISTRATOR};
+        Utility.checkRole(request, roles);
+
         Contact contact = new Contact();
         ArrayList<String> errors = new ArrayList<>();
         setFirstName(request, contact, errors);
@@ -22,6 +26,7 @@ public class AddContact extends RequestHandler {
         setHour(request, contact, errors);
         setGsm(request, contact, errors);
         setEmail(request, contact, errors);
+        setUserid(request, contact, errors);
 
         if (errors.size() == 0) {
             try {
@@ -44,7 +49,7 @@ public class AddContact extends RequestHandler {
     public void setFirstName(HttpServletRequest request, Contact contact, ArrayList<String> errors) {
         try {
             String firstName = request.getParameter("firstName");
-            contact.setFirstname(firstName);
+            contact.setFirstName(firstName);
             request.setAttribute("firstNamePreviousValue", firstName);
         } catch (Exception e) {
             errors.add(e.getMessage());
@@ -54,7 +59,7 @@ public class AddContact extends RequestHandler {
     public void setLastName(HttpServletRequest request, Contact contact, ArrayList<String> errors) {
         try {
             String lastName = request.getParameter("lastName");
-            contact.setLastname(lastName);
+            contact.setLastName(lastName);
             request.setAttribute("lastNamePreviousValue", lastName);
         } catch (Exception e) {
             errors.add(e.getMessage());
@@ -64,9 +69,7 @@ public class AddContact extends RequestHandler {
     public void setDate(HttpServletRequest request, Contact contact, ArrayList<String> errors) {
         try {
             String date = request.getParameter("date");
-            if (date == null || date.isEmpty()) {
-                throw new IllegalArgumentException("No valid date given");
-            }
+
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate localDate = LocalDate.parse(date, dateTimeFormatter);
 
@@ -74,7 +77,6 @@ public class AddContact extends RequestHandler {
             request.setAttribute("datePreviousValue", date);
         } catch (Exception e) {
             errors.add(e.getMessage());
-            System.out.println(e.getMessage());
         }
     }
 
@@ -87,11 +89,9 @@ public class AddContact extends RequestHandler {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(hour, dateTimeFormatter);
             contact.setHour(localTime);
-            System.out.println(hour);
             request.setAttribute("hourPreviousValue", hour);
         } catch (Exception e) {
             errors.add(e.getMessage());
-            System.out.println(e.getMessage());
         }
     }
 
@@ -114,4 +114,14 @@ public class AddContact extends RequestHandler {
             errors.add(e.getMessage());
         }
     }
+
+    public void setUserid(HttpServletRequest request, Contact contact, ArrayList<String> errors) {
+        try {
+            String userid = request.getParameter("userid");
+            contact.setUserid(userid);
+        } catch (Exception e) {
+            errors.add(e.getMessage());
+        }
+    }
+
 }

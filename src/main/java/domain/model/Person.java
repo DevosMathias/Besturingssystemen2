@@ -150,6 +150,9 @@ public class Person {
 	}
 
 	public void setRole(Role role) {
+		if (role == null) {
+			throw new DomainException("No role given");
+		}
 		this.role = role;
 	}
 

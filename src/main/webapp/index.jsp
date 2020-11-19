@@ -42,7 +42,7 @@
 							<input type="text" id="userid" name="userid" required>
 						</p>
 						<p><label for="password">Password</label>
-							<input type="text" id="password" name="password">
+							<input type="password" id="password" name="password">
 						</p>
 						<p><input type="submit" id="logIn" value="Log in"></p>
 					</form>
