@@ -49,7 +49,7 @@
                         <td><C:out value="${contact.email}"/></td>
                     </tr>
                 </C:forEach>
-                    <caption>Contacts Overview</caption>
+                    <caption>Contacts Positive Test Overview</caption>
                 </table>
             </C:when>
             <C:otherwise>
