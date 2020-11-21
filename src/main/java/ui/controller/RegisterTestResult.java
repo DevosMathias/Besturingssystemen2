@@ -21,7 +21,7 @@ public class RegisterTestResult extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.addTest(test);
-                return "Controller?action=ContactOverview";
+                return "Controller?action=ContactOverviewRedirect";
             } catch (Exception e) {
                 errors.add(e.getMessage());
                 System.out.println(e.getMessage());

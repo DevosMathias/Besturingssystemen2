@@ -26,7 +26,7 @@ public class SignUp extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.addPerson(person);
-                return "index.jsp";
+                return "Controller?action=HomeRedirect";
             } catch (Exception e) {
                 errors.add(e.getMessage());
             }

@@ -18,12 +18,12 @@ public class LogIn extends RequestHandler {
             if (person != null && person.isCorrectPassword(password)) {
                 request.getSession().setAttribute("personLogIn", person);
                 //response.sendRedirect("index.jsp");
+                return "Controller?action=HomeRedirect";
             }
         } catch (Exception e) {
-            System.out.println("test");
             request.setAttribute("error", "No valid userid/password");
         }
-        return "index.jsp";
+        return "Controller?action=Home";
 
 
         /*if (person != null && person.isCorrectPassword(password)) {

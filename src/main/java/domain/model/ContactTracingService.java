@@ -64,6 +64,10 @@ public class ContactTracingService {
 		personDB.changeMail(userid, newMail);
 	}
 
+	public List<Person> getAllPersonsWithoutTest() {
+		return personDB.getAllPersonsWithoutTest();
+	}
+
 	//methods for contact
 	public void addContact(Contact contact) {
 		contactDB.add(contact);

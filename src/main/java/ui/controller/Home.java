@@ -3,10 +3,9 @@ package ui.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LogOut extends RequestHandler {
+public class Home extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        request.getSession().invalidate();
-        return "Controller?action=HomeRedirect";
+        return "index.jsp";
     }
 }

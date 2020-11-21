@@ -29,6 +29,8 @@ public class controller extends HttpServlet {
         String command = request.getParameter("action");
         String destination = "index.jsp";
 
+        String redirect = request.getParameter("redirect");
+
         if (command != null) {
             try {
                 RequestHandler handler = handlerFactory.getHandler(command, service);
@@ -45,7 +47,11 @@ public class controller extends HttpServlet {
             }
         }
 
-        RequestDispatcher view = request.getRequestDispatcher(destination);
-        view.forward(request, response);
+        if (destination.endsWith("Redirect")) {
+            response.sendRedirect(destination.substring(0, destination.length()-8));
+        } else {
+            RequestDispatcher view = request.getRequestDispatcher(destination);
+            view.forward(request, response);
+        }
     }
 }

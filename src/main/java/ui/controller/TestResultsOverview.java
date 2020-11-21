@@ -14,9 +14,7 @@ public class TestResultsOverview extends RequestHandler {
         Utility.checkRole(request, roles);
 
         List<Test> tests = service.getAllTests();
-
         request.setAttribute("tests", tests);
-
 
         return "testResultsOverview.jsp";
     }

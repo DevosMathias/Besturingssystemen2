@@ -80,6 +80,7 @@ public class PersonDBSQL implements PersonDB {
         return persons;
     }
 
+    @Override
     public Person get(String id) {
         if (id == null || id.trim().isEmpty()) {
             throw new DbException("No id given");
@@ -124,5 +125,32 @@ public class PersonDBSQL implements PersonDB {
         } catch (SQLException e) {
             throw new DbException(e);
         }
+    }
+
+    @Override
+    public List<Person> getAllPersonsWithoutTest() {
+        List<Person> persons = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s.person AS S LEFT OUTER JOIN %s.test AS T USING(userid) WHERE T.userid IS NULL", this.schema, this.schema);
+
+        try {
+            PreparedStatement statementSQL = connection.prepareStatement(sql);
+            ResultSet result = statementSQL.executeQuery();
+
+            while(result.next()) {
+                String userid = result.getString("userid");
+                String email = result.getString("email");
+                String password = result.getString("password");
+                String fname = result.getString("fname");
+                String lname = result.getString("lname");
+                String role = result.getString("role");
+
+                Person person = new Person(userid, email, password, fname, lname, Role.valueOf(role.toUpperCase()));
+                persons.add(person);
+            }
+        } catch (SQLException e){
+            throw new DbException(e);
+        }
+
+        return persons;
     }
 }

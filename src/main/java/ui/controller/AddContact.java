@@ -37,7 +37,7 @@ public class AddContact extends RequestHandler {
                 request.removeAttribute("hourPreviousValue");
                 request.removeAttribute("gsmPreviousValue");
                 request.removeAttribute("emailPreviousValue");
-                return "Controller?action=ContactOverview";
+                return "Controller?action=ContactOverviewRedirect";
             } catch (Exception e) {
                 errors.add(e.getMessage());
             }

@@ -30,6 +30,7 @@
                     <tr>
                         <th>Userid</th>
                         <th>Date</th>
+                        <th id="link"><a href="/Controller?action=NoTestResultsOverview">Show persons without tests</a></th>
                     </tr>
                     <C:forEach var="test" items="${tests}">
                         <fmt:parseDate value="${test.date}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>

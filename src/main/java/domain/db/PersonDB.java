@@ -36,4 +36,11 @@ public interface PersonDB {
      * @throws DbException if something went wrong
      */
     void changeMail(String userid, String newMail);
+
+    /**
+     * Returns a list of persons stored in the database that don't have a positive covid-19 tests
+     * @return an arraylist with all the persons that don't have a positive covid-19 test
+     * @throws DbException if something went wrong
+     */
+    List<Person> getAllPersonsWithoutTest();
 }
