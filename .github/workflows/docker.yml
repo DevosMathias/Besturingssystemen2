@@ -1,24 +1,17 @@
 name: Publish Docker image
-on:
-  release:
-    types: [push]
+on: [push]
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Push to Docker Hub
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: mdevos5/besturingssystemen2
-          tag_with_ref: true
       - name: docker login
-        run: docker login -u $username -p $password
-      - name: docker build project
-        run: docker build -t ./src project
-      - name: docker push project
-        run: docker push $repository/project:latest
+          env:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+          run: docker login -u $username -p $password
+      - name: docker build
+        run: docker build ./src -t mdevos/besturingssystemen2:latest
+      - name: docker push
+        run: docker push mdevos/besturingssystemen2:latest
