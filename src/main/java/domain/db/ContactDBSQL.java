@@ -132,7 +132,6 @@ public class ContactDBSQL implements ContactDB {
     private List<Contact> getResult(ResultSet result) throws SQLException {
         ArrayList<Contact> contacts = new ArrayList<>();
         while (result.next()) {
-
             String firstName = result.getString("fname");
             String lastName = result.getString("lname");
             LocalDate localDate = result.getObject("date", LocalDate.class);
