@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM sgrio/java-oracle
+FROM openjdk:8-jdk
 MAINTAINER Mathias Devos (myemail@gmail.com)
 RUN apt-get update
 RUN apt-get install -y maven
