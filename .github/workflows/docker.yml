@@ -11,4 +11,4 @@ jobs:
       - name: docker build
         run: docker build -t test .
       - name: docker push
-        run: docker push mdevos5/besturingssystemen2
+        run: docker push mdevos5/besturingssystemen2:latest
