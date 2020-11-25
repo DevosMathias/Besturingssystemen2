@@ -16,3 +16,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: mdevos5/besturingssystemen2
           tag_with_ref: true
+      - name: docker login
+        run: docker login -u $username -p $password
+      - name: docker build project
+        run: docker build -t ./src project
+      - name: docker push project
+        run: docker push $repository/project:latest
