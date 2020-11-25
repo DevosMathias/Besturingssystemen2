@@ -3,6 +3,7 @@ package domain.db;
 import domain.model.Contact;
 import util.DbConnectionService;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -67,18 +68,7 @@ public class ContactDBSQL implements ContactDB {
             statementSql.setString(1, userid);
             ResultSet result = statementSql.executeQuery();
 
-            while(result.next()) {
-                String firstName = result.getString("fname");
-                String lastName = result.getString("lname");
-                LocalDate date = result.getObject("date", LocalDate.class);
-                LocalTime hour = result.getObject("hour", LocalTime.class);
-                String gsm = result.getString("gsm");
-                String email = result.getString("email");
-                String id = result.getString("userid");
-
-                Contact contact = new Contact(firstName, lastName, date, hour, gsm, email, id);
-                contacts.add(contact);
-            }
+            contacts = getResult(result);
         } catch (SQLException e) {
             throw new DbException(e);
         }
@@ -93,18 +83,7 @@ public class ContactDBSQL implements ContactDB {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             ResultSet result = statementSql.executeQuery();
 
-            while(result.next()) {
-                String firstName = result.getString("fname");
-                String lastName = result.getString("lname");
-                LocalDate date = result.getObject("date", LocalDate.class);
-                LocalTime hour = result.getObject("hour", LocalTime.class);
-                String gsm = result.getString("gsm");
-                String email = result.getString("email");
-                String id = result.getString("userid");
-
-                Contact contact = new Contact(firstName, lastName, date, hour, gsm, email, id);
-                contacts.add(contact);
-            }
+            contacts = getResult(result);
         } catch (SQLException e) {
             throw new DbException(e);
         }
@@ -122,18 +101,7 @@ public class ContactDBSQL implements ContactDB {
             statementSql.setString(1, userid);
             ResultSet result = statementSql.executeQuery();
 
-            while (result.next()) {
-                String firstName = result.getString("fname");
-                String lastName = result.getString("lname");
-                LocalDate date = result.getObject("date", LocalDate.class);
-                LocalTime hour = result.getObject("hour", LocalTime.class);
-                String gsm = result.getString("gsm");
-                String email = result.getString("email");
-                String id = result.getString("userid");
-
-                Contact contact = new Contact(firstName, lastName, date, hour, gsm, email, id);
-                contacts.add(contact);
-            }
+            contacts = getResult(result);
         } catch (SQLException e) {
             throw new DbException(e);
         }
@@ -153,21 +121,29 @@ public class ContactDBSQL implements ContactDB {
             statementSQL.setObject(2, date);
             ResultSet result = statementSQL.executeQuery();
 
-            while (result.next()) {
-                String firstName = result.getString("fname");
-                String lastName = result.getString("lname");
-                LocalDate localDate = result.getObject("date", LocalDate.class);
-                LocalTime hour = result.getObject("hour", LocalTime.class);
-                String gsm = result.getString("gsm");
-                String email = result.getString("email");
-                String id = result.getString("userid");
+            contacts = getResult(result);
 
-                Contact contact = new Contact(firstName, lastName, localDate, hour, gsm, email, id);
-                contacts.add(contact);
-            }
         } catch (SQLException e) {
             throw new DbException(e);
         }
+        return contacts;
+    }
+
+    private List<Contact> getResult(ResultSet result) throws SQLException {
+        ArrayList<Contact> contacts = new ArrayList<>();
+        while (result.next()) {
+            String firstName = result.getString("fname");
+            String lastName = result.getString("lname");
+            LocalDate localDate = result.getObject("date", LocalDate.class);
+            LocalTime hour = result.getObject("hour", LocalTime.class);
+            String gsm = result.getString("gsm");
+            String email = result.getString("email");
+            String id = result.getString("userid");
+
+            Contact contact = new Contact(firstName, lastName, localDate, hour, gsm, email, id);
+            contacts.add(contact);
+        }
+
         return contacts;
     }
 }

@@ -1,5 +1,6 @@
 package ui.controller;
 
+import domain.model.Person;
 import domain.model.Role;
 
 import javax.rmi.CORBA.Util;
@@ -12,8 +13,10 @@ public class ChangeMailForm extends RequestHandler {
         Role[] role = {Role.USER, Role.ADMINISTRATOR};
         Utility.checkRole(request, role);
 
-        String userid = request.getParameter("userid");
-        request.setAttribute("userid", userid);
+
+        /*Person person = (Person) request.getSession().getAttribute("personLogIn");
+        String userid = person.getUserid();
+        request.setAttribute("userid", userid);*/
         return "changeMailForm.jsp";
     }
 }

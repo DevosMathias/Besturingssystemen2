@@ -30,7 +30,7 @@
                     <tr>
                         <th>Userid</th>
                         <th>Name</th>
-                        <th id="link"><a href="/Controller?action=TestResultsOverview">Show persons without tests</a></th>
+                        <th id="link"><a href="/Controller?action=TestResultsOverview">Show persons with tests</a></th>
                     </tr>
                     <C:forEach var="person" items="${persons}">
                         <tr>

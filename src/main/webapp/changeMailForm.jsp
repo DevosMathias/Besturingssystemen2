@@ -11,19 +11,10 @@
 </head>
 <body>
 <div id="container">
-    <header>
-        <h1><!--<span>Tracing App</span>--></h1>
-        <nav>
-            <ul>
-                <li><a href="Controller">Home</a></li>
-                <li><a href="Controller?action=Overview">Overview</a></li>
-                <li><a href="Controller?action=ContactOverview">Contacts</a></li>
-                <li><a href="Controller?action=Register">Register</a></li>
-            </ul>
-        </nav>
-        <h2>Change Mail</h2>
+    <jsp:include page="header.jsp">
+        <jsp:param name="actual" value="Change Mail"></jsp:param>
+    </jsp:include>
 
-    </header>
     <main>
         <C:if test="${error ne null}">
             <div class="alert-danger">
@@ -35,7 +26,7 @@
         <form method="POST" action="/Controller?action=ChangeMail">
             <p><label for="newMail">New mail</label>
                 <input type="text" id="newMail" name="newMail" required></p>
-            <p><input type="hidden" id="userid" name="userid" value="<C:out value="${userid}"/>"></p>
+            <!--<p><input type="hidden" id="userid" name="userid" value="<C:out value="${userid}"/>"></p> -->
             <p><input type="submit" id="changeMail" value="Change mail"></p>
         </form>
     </main>

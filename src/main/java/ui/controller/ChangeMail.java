@@ -12,22 +12,23 @@ public class ChangeMail extends RequestHandler {
         Role[] roles = {Role.USER, Role.ADMINISTRATOR};
         Utility.checkRole(request, roles);
 
-        String userid = request.getParameter("userid");
+
+        //String userid = request.getParameter("userid");
         String newMail = request.getParameter("newMail");
         String error;
         try {
-            Person person = service.getPerson(userid);
+            Person person = (Person) request.getSession().getAttribute("personLogIn");
             person.setEmail(newMail);
 
             //Persoon wegschrijven of mail wegschrijven???
-            this.service.changeMailPerson(userid, newMail);
+            this.service.changeMailPerson(person.getUserid(), newMail);
             return "index.jsp";
         } catch (Exception e) {
             error = e.getMessage();
         }
 
         request.setAttribute("error", error);
-        request.setAttribute("userid", userid);
+        //request.setAttribute("userid", userid);
         return "Controller?action=ChangeMailForm";
     }
 }

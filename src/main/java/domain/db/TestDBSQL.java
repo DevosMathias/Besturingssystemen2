@@ -26,7 +26,7 @@ public class TestDBSQL implements TestDB {
     @Override
     public List<Test> getAllTests() {
         List<Test> tests = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.test", this.schema);
+        String sql = String.format("SELECT * FROM %s.test ORDER BY date DESC, userid ASC", this.schema);
 
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class TestDBSQL implements TestDB {
     @Override
     public List<Test> getAllTestsPerson(String userid) {
         List<Test> tests = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.test WHERE userid = ?", this.schema);
+        String sql = String.format("SELECT * FROM %s.test WHERE userid = ? ORDER BY date DESC", this.schema);
 
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);

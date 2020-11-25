@@ -25,11 +25,6 @@
                         <td><C:out value="${person.email}"/></td>
                         <td><C:out value="${person.firstName}"/></td>
                         <td><C:out value="${person.lastName}"/></td>
-                    <C:if test="${personLogIn ne null}">
-                        <C:if test="${personLogIn.userid eq person.userid}">
-                            <td><a href="Controller?action=ChangeMailForm&userid=<C:out value="${person.userid}"/>">Change Mail</a></td>
-                        </C:if>
-                    </C:if>
                     </tr>
                 </C:forEach>
 

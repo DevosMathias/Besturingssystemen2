@@ -32,6 +32,12 @@
 			<C:choose>
 				<C:when test="${personLogIn ne null}">
 					<p>Welcome, ${personLogIn.firstName}</p>
+
+					<form method="GET" action="/Controller?">
+						<input type="hidden" name="action" value="ChangeMailForm">
+						<p><input type="submit" id="changeMail" value="Change e-mail"></p>
+					</form>
+
 					<form method="POST" action="/Controller?action=LogOut">
 						<p><input type="submit" id="logOut" value="Log out"></p>
 					</form>
