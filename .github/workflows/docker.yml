@@ -10,3 +10,5 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: docker build
         run: docker build -t test .
+      - name: docker push
+        run: docker push mdevos5/besturingssystemen2 .
