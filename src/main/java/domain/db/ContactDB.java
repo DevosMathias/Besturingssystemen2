@@ -12,7 +12,6 @@ public interface ContactDB {
      * @param contact The contact to be added
      * @throws DbException if something went wrong
      */
-
     void add(Contact contact);
 
     /**
