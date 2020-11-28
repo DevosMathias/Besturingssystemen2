@@ -1,0 +1,43 @@
+name: Java CI
+
+on:
+  push:
+    branches: [development]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: mdevos5/besturingssystemen2
+          tags: dev
+          tag_with_ref: true
+
+
+
+      #- name: Check out the repo
+      #  uses: actions/checkout@v2
+      #- name: docker login
+      #  run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      #- name: docker build
+      #  run: docker build -t besturingssystemen2 .
+      #- name: tag image
+      #  run: docker tag besturingssystemen2 mdevos5/besturingssystemen2
+      #- name: docker push
+      #  run: docker push mdevos5/besturingssystemen2
