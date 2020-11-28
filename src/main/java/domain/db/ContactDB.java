@@ -19,6 +19,7 @@ public interface ContactDB {
      * @param contact The contact to be deleted
      * @throws DbException if something went wrong
      */
+
     void delete(Contact contact);
 
     /**
