@@ -5,7 +5,7 @@ on:
     branches: [development]
 
 jobs:
-  build:
+  maven:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,10 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
+  dockerhub:
+    runs-on: ubuntu-latest
 
+    steps:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Push to Docker Hub
