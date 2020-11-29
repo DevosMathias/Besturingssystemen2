@@ -19,6 +19,7 @@ public class ContactDBSQL implements ContactDB {
         this.schema = DbConnectionService.getSchema();
         System.out.println(this.schema);
     }
+    
     @Override
     public void add(Contact contact) {
         if (contact == null) {
