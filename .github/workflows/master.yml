@@ -43,18 +43,3 @@ jobs:
         automatic_release_tag: "latest"
         prerelease: false
         title: Development Build
-          #files: |
-          #      LICENSE.txt
-          #      *.jar
-
-
-      #- name: Check out the repo
-      #  uses: actions/checkout@v2
-      #- name: docker login
-      #  run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      #- name: docker build
-      #  run: docker build -t besturingssystemen2 .
-      #- name: tag image
-      #  run: docker tag besturingssystemen2 mdevos5/besturingssystemen2
-      #- name: docker push
-      #  run: docker push mdevos5/besturingssystemen2
