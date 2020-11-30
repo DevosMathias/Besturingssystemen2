@@ -20,6 +20,7 @@ public class ContactDBSQL implements ContactDB {
         System.out.println(this.schema);
     }
 
+    
     @Override
     public void add(Contact contact) {
         if (contact == null) {
